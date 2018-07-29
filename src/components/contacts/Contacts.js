@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import Contact from "./Contact";
-import axios from "axios";
-import { types } from "../../actions/actiontypes";
-import store from "../../store";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { getContacts } from "../../actions/contactactions";
 
 class Contacts extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.getContacts();
   }
 
@@ -31,16 +29,11 @@ const mapStateToProps = state => ({
 });
 Contacts.propTypes = {
   contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.array.isRequired,
   getContacts: PropTypes.func.isRequired
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-      getContacts: () => dispatch({type: types.GET_CONTACTS})
-  };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { getContacts }
 )(Contacts);
