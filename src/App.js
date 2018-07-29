@@ -8,7 +8,6 @@ import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import store from "./store";
 
 class App extends Component {
   render() {
