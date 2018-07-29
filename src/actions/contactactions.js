@@ -14,9 +14,11 @@ export const getContacts = () => async dispatch => {
 };
 
 export const getContact = id => async dispatch => {
-  const pr = await Axios.get('https://jsonplaceholder.typicode.com/users/'+id);
+  const pr = await Axios.get(
+    "https://jsonplaceholder.typicode.com/users/" + id
+  );
   const contact = pr.data;
-  dispatch({ type: types.GET_CONTACT,payload: contact});
+  dispatch({ type: types.GET_CONTACT, payload: contact });
 };
 
 export const addContact = contact => async dispatch => {
@@ -43,4 +45,12 @@ export const deleteContact = id => async dispatch => {
       payload: id
     });
   }
+};
+
+export const updateContact = contact => async dispatch => {
+  const pr = await Axios.put(
+    `https://jsonplaceholder.typicode.com/users/${contact.id}`,
+    contact
+  );
+  dispatch({ type: types.UPDATE_CONTACT, payload: pr.data });
 };
