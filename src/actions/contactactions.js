@@ -13,16 +13,28 @@ export const getContacts = () => async dispatch => {
   });
 };
 
-export const addContact = contact => {
-  return {
+export const addContact = contact => async dispatch => {
+  const pr = await Axios.post(
+    "https://jsonplaceholder.typicode.com/users",
+    contact
+  );
+  dispatch({
     type: types.ADD_CONTACT,
-    payload: contact
-  };
+    payload: pr.data
+  });
 };
 
-export const deleteContact = id => {
-  return {
-    type: types.DELETE_CONTACT,
-    payload: id
-  };
+export const deleteContact = id => async dispatch => {
+  try {
+    await Axios.delete("https://jsonplaceholder.typicode.com/users/" + id);
+    dispatch({
+      type: types.DELETE_CONTACT,
+      payload: id
+    });
+  } catch (error) {
+    dispatch({
+      type: types.DELETE_CONTACT,
+      payload: id
+    });
+  }
 };
