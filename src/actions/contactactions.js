@@ -13,6 +13,12 @@ export const getContacts = () => async dispatch => {
   });
 };
 
+export const getContact = id => async dispatch => {
+  const pr = await Axios.get('https://jsonplaceholder.typicode.com/users/'+id);
+  const contact = pr.data;
+  dispatch({ type: types.GET_CONTACT,payload: contact});
+};
+
 export const addContact = contact => async dispatch => {
   const pr = await Axios.post(
     "https://jsonplaceholder.typicode.com/users",
